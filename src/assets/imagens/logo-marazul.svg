@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186 36" fill="none">
+  <!-- Ícone de ondas duplas -->
+  <path
+    d="M4 24 C7.5 11 13 11 16.5 24 C20 37 25.5 37 29 24 C32.5 11 38 11 41.5 24"
+    stroke="#00b4d8"
+    stroke-width="2.3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M10 24 C13.5 11 19 11 22.5 24 C26 37 31.5 37 35 24 C38.5 11 44 11 47.5 24"
+    stroke="#00b4d8"
+    stroke-width="2.3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.32"
+  />
+  <!-- Wordmark -->
+  <text
+    x="59"
+    y="25"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+    font-size="17"
+    font-weight="600"
+    letter-spacing="0.25"
+    fill="#f4f7fa"
+  >Marazul</text>
+</svg>
