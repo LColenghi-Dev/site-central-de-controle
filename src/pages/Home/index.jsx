@@ -44,11 +44,6 @@ export default function Home() {
 
         {/* Texto centralizado */}
         <div className="hero__content">
-          <span className="hero__badge">
-            <span className="hero__badge-dot" />
-            Ecossistema de Marketing Digital
-          </span>
-
           <h1 className="hero__h1">
             Resultados que<br />
             <em>transformam</em> negócios
@@ -200,20 +195,16 @@ export default function Home() {
 
             {/* Card 3 — Central ClickUp (wide) */}
             <div className="bento-card bento-card--wide" id="diretoria">
-              <div className="clickup-header">
-                <div className="bento-card__icon">
-                  <Layers size={20} />
-                </div>
-                <div>
-                  <p className="bento-card__kicker">Central Unificada</p>
-                  <h3 className="bento-card__title">Gestão no ClickUp</h3>
-                  <p className="bento-card__desc">
-                    Todos os times e entregas em um único ambiente — do briefing
-                    à publicação, com visibilidade total sobre prazos e
-                    responsáveis em cada frente.
-                  </p>
-                </div>
+              <div className="bento-card__icon">
+                <Layers size={20} />
               </div>
+              <p className="bento-card__kicker">Central Unificada</p>
+              <h3 className="bento-card__title">Gestão no ClickUp</h3>
+              <p className="bento-card__desc">
+                Todos os times e entregas em um único ambiente — do briefing
+                à publicação, com visibilidade total sobre prazos e
+                responsáveis em cada frente.
+              </p>
 
               {/* 3 sub-colunas internas */}
               <div className="clickup-cols">
