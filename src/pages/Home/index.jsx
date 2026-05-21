@@ -1,6 +1,4 @@
 import {
-  ArrowRight,
-  Play,
   TrendingUp,
   Users,
   Video,
@@ -30,6 +28,7 @@ const METRIC_BADGES = ['m-badge--green', 'm-badge--cyan', 'm-badge--yellow', 'm-
 export default function Home() {
   return (
     <>
+      <div className="aurora" aria-hidden="true" />
       <Navbar />
 
       {/* ── HERO ───────────────────────────────────────────── */}
@@ -55,16 +54,6 @@ export default function Home() {
             uma única plataforma pensada para crescimento escalável.
           </p>
 
-          <div className="hero__actions">
-            <button className="btn-primary" type="button">
-              Conhecer o Ecossistema
-              <ArrowRight size={16} />
-            </button>
-            <button className="btn-ghost" type="button">
-              <Play size={14} />
-              Ver demonstração
-            </button>
-          </div>
         </div>
 
         {/* ── MOCKUP FLUTUANTE ─────────────────────────────── */}

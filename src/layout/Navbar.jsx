@@ -15,7 +15,7 @@ export default function Navbar() {
         </nav>
 
         <button className="navbar__cta" type="button">
-          Acessar Central
+          Acessar Painel
         </button>
       </div>
     </header>

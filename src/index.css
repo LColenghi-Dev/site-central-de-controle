@@ -113,23 +113,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .navbar__cta {
   justify-self: end;
   font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
-  padding: 9px 22px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 9px 24px;
   border-radius: var(--r-sm);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.04);
-  letter-spacing: 0.015em;
-  transition: border-color 0.3s ease,
-              box-shadow    0.3s ease,
-              background    0.3s ease;
+  border: 1px solid rgba(0, 210, 245, 0.28);
+  background: linear-gradient(135deg, #006fa8 0%, #00b4d8 55%, #00d0f0 100%);
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 22px rgba(0, 180, 216, 0.30),
+              0 2px 8px  rgba(0, 0, 0, 0.28);
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 .navbar__cta:hover {
-  border-color: var(--accent);
-  background:   rgba(0, 180, 216, 0.07);
-  box-shadow:   0 0 20px rgba(0, 180, 216, 0.18),
-                inset 0 0 14px rgba(0, 180, 216, 0.05);
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.55),
+              0 4px 18px rgba(0, 0, 0, 0.35);
+  transform: scale(1.03);
+}
+
+/* ─── AURORA ─────────────────────────────────────────────── */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 920px 720px at 8%  22%, rgba(0, 180, 216, 0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 760px 620px at 92% 58%, rgba(0, 100, 215, 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 640px 520px at 44% 87%, rgba(0, 180, 216, 0.06) 0%, transparent 65%);
 }
 
 /* ─── HERO ───────────────────────────────────────────────── */
@@ -234,7 +245,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--text-secondary);
   max-width: 500px;
   line-height: 1.72;
-  margin-bottom: 52px;
+  margin-bottom: 80px;
   font-weight: 400;
 }
 
