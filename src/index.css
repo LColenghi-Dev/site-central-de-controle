@@ -839,8 +839,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ─── FOOTER ─────────────────────────────────────────────── */
 .footer {
-  background: var(--bg-abyss);
-  border-top: 1px solid var(--border);
+  background: #0c1627;
+  border-top: 1px solid rgba(0, 180, 216, 0.18);
 }
 
 .footer__top {
@@ -856,17 +856,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .footer__tagline {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.72;
   max-width: 265px;
 }
 
 .footer__col-label {
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--accent);
   margin-bottom: 22px;
 }
 
@@ -878,15 +878,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .footer__col-links a {
   font-size: 14px;
-  color: var(--text-secondary);
-  transition: color 0.2s;
+  color: rgba(255, 255, 255, 0.82);
+  transition: color 0.22s;
 }
 
-.footer__col-links a:hover { color: var(--text-primary); }
+.footer__col-links a:hover { color: var(--accent); }
 
 .footer__divider {
   height: 1px;
-  background: var(--border);
+  background: rgba(255, 255, 255, 0.10);
   max-width: 1200px;
   margin: 0 24px;
 }
@@ -903,7 +903,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .footer__copy {
   font-size: 13px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .footer__socials {
@@ -913,20 +913,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .footer__social {
-  width: 30px; height: 30px;
+  width: 32px; height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.22s, border-color 0.22s, background 0.22s;
 }
 
 .footer__social:hover {
-  color: var(--text-secondary);
-  border-color: var(--border-hover);
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--accent);
+  border-color: rgba(0, 180, 216, 0.50);
+  background: rgba(0, 180, 216, 0.10);
 }
 
 .footer__status {
@@ -934,7 +934,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: center;
   gap: 7px;
   font-size: 12px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.60);
   letter-spacing: 0.01em;
 }
 
