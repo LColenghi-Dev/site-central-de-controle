@@ -7,6 +7,7 @@ import {
   Palette,
   Calendar,
   Layers,
+  Cpu,
 } from 'lucide-react'
 import Navbar from '../../layout/Navbar.jsx'
 import Footer from '../../layout/Footer.jsx'
@@ -176,64 +177,58 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bento-grid" id="solucoes">
-            {/* Card 1 — Tráfego Pago */}
-            <BentoCard
-              icon={<TrendingUp size={20} />}
-              kicker="Performance"
-              title="Tráfego Pago"
-              description="Gestão estratégica de campanhas no Meta Ads e Google Ads com relatórios em tempo real, otimização contínua e metas claras de ROAS e CAC."
-            />
+          {/* ── Envelope único ── */}
+          <div className="bento-envelope" id="solucoes">
+            <div className="bento-grid">
 
-            {/* Card 2 — CRM */}
-            <BentoCard
-              icon={<Users size={20} />}
-              kicker="Relacionamento"
-              title="CRM de Clientes"
-              description="Pipeline visual de clientes, histórico completo de interações e automações de follow-up para que nenhuma oportunidade escape do radar."
-            />
+              {/* Linha 1 */}
+              <BentoCard
+                icon={<TrendingUp size={20} />}
+                kicker="Performance"
+                title="Tráfego Pago"
+                description="Gestão estratégica de campanhas no Meta Ads e Google Ads com relatórios em tempo real, otimização contínua e metas claras de ROAS e CAC."
+              />
+              <BentoCard
+                icon={<Users size={20} />}
+                kicker="Relacionamento"
+                title="CRM de Clientes"
+                description="Pipeline visual de clientes, histórico completo de interações e automações de follow-up para que nenhuma oportunidade escape do radar."
+              />
 
-            {/* Card 3 — Central ClickUp (wide) */}
-            <div className="bento-card bento-card--wide" id="diretoria">
-              <div className="bento-card__icon">
-                <Layers size={20} />
-              </div>
-              <p className="bento-card__kicker">Central Unificada</p>
-              <h3 className="bento-card__title">Gestão no ClickUp</h3>
-              <p className="bento-card__desc">
-                Todos os times e entregas em um único ambiente — do briefing
-                à publicação, com visibilidade total sobre prazos e
-                responsáveis em cada frente.
-              </p>
+              {/* Linha 2 */}
+              <BentoCard
+                icon={<Layers size={20} />}
+                kicker="Central Unificada"
+                title="Gestão no ClickUp"
+                description="Todos os times e entregas em um único ambiente — do briefing à publicação, com visibilidade total sobre prazos e responsáveis."
+              />
+              <BentoCard
+                icon={<Cpu size={20} />}
+                kicker="Automação"
+                title="Automações n8n"
+                description="Construção de fluxos inteligentes, integrações de APIs e automação de processos internos para eliminar tarefas manuais."
+              />
 
-              {/* 3 sub-colunas internas */}
-              <div className="clickup-cols">
+              {/* Strip inferior — 3 cards de ponta a ponta */}
+              <div className="bento-strip" id="diretoria">
                 <div className="clickup-col">
-                  <div className="clickup-col__icon">
-                    <Video size={18} />
-                  </div>
+                  <div className="clickup-col__icon"><Video size={18} /></div>
                   <p className="clickup-col__title">Produção de Vídeo</p>
                   <p className="clickup-col__desc">
                     Roteiros, gravações e edições organizados por etapa com
                     prazo e responsável definidos.
                   </p>
                 </div>
-
                 <div className="clickup-col">
-                  <div className="clickup-col__icon">
-                    <Palette size={18} />
-                  </div>
+                  <div className="clickup-col__icon"><Palette size={18} /></div>
                   <p className="clickup-col__title">Design</p>
                   <p className="clickup-col__desc">
                     Fluxo de aprovação de criativos com feedback centralizado
                     e histórico de versões acessível.
                   </p>
                 </div>
-
                 <div className="clickup-col">
-                  <div className="clickup-col__icon">
-                    <Calendar size={18} />
-                  </div>
+                  <div className="clickup-col__icon"><Calendar size={18} /></div>
                   <p className="clickup-col__title">Agendamentos</p>
                   <p className="clickup-col__desc">
                     Calendário editorial e publicações sincronizados com o
@@ -241,6 +236,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

@@ -31,8 +31,6 @@ export default function Footer() {
           <ul className="footer__col-links">
             <li><a href="#">Sobre</a></li>
             <li><a href="#diretoria">Diretoria</a></li>
-            <li><a href="#">Carreiras</a></li>
-            <li><a href="#">Blog</a></li>
           </ul>
         </div>
 
@@ -40,9 +38,6 @@ export default function Footer() {
         <div>
           <p className="footer__col-label">Suporte</p>
           <ul className="footer__col-links">
-            <li><a href="#">Central de Ajuda</a></li>
-            <li><a href="#">Documentação</a></li>
-            <li><a href="#">Status</a></li>
             <li><a href="#">Contato</a></li>
           </ul>
         </div>
