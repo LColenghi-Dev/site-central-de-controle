@@ -28,7 +28,6 @@ const METRIC_BADGES = ['m-badge--green', 'm-badge--cyan', 'm-badge--yellow', 'm-
 export default function Home() {
   return (
     <>
-      <div className="aurora" aria-hidden="true" />
       <Navbar />
 
       {/* ── HERO ───────────────────────────────────────────── */}
