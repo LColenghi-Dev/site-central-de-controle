@@ -7,23 +7,29 @@ import {
   Layers,
   Cpu,
 } from 'lucide-react'
-import Navbar from '../../layout/Navbar.jsx'
-import Footer from '../../layout/Footer.jsx'
+import Navbar  from '../../layout/Navbar.jsx'
+import Footer  from '../../layout/Footer.jsx'
 import BentoCard from '../../components/BentoCard.jsx'
-import heroBg from '../../assets/imagens/download.jpeg'
+import heroBg  from '../../assets/imagens/download.jpeg'
 
 /* Alturas das barras do gráfico mockup (%) */
 const BAR_HEIGHTS = [36, 58, 42, 76, 52, 90, 68, 82, 55, 72]
 
 /* Cores dos avatares da lista mockup */
 const AVATAR_COLORS = [
-  { bg: 'rgba(0,180,216,0.14)',  border: 'rgba(0,180,216,0.3)'   },
-  { bg: 'rgba(148,163,184,0.1)', border: 'rgba(148,163,184,0.25)' },
-  { bg: 'rgba(34,197,94,0.12)',  border: 'rgba(34,197,94,0.28)'  },
-  { bg: 'rgba(251,191,36,0.12)', border: 'rgba(251,191,36,0.28)' },
+  { bg: 'rgba(34,211,238,0.14)',  border: 'rgba(34,211,238,0.3)'   },
+  { bg: 'rgba(148,163,184,0.10)', border: 'rgba(148,163,184,0.25)' },
+  { bg: 'rgba(52,211,153,0.12)',  border: 'rgba(52,211,153,0.28)'  },
+  { bg: 'rgba(251,191,36,0.12)',  border: 'rgba(251,191,36,0.28)'  },
 ]
 
 const METRIC_BADGES = ['m-badge--green', 'm-badge--cyan', 'm-badge--yellow', 'm-badge--red']
+
+const STATS = [
+  { value: 'R$ 2.4M+', label: 'Receita gerenciada' },
+  { value: '4.2×',     label: 'ROAS médio'          },
+  { value: '38',       label: 'Clientes ativos'      },
+]
 
 export default function Home() {
   return (
@@ -32,17 +38,29 @@ export default function Home() {
 
       {/* ── HERO ───────────────────────────────────────────── */}
       <section className="hero">
-        {/* Imagem de fundo */}
+        {/* Foto de fundo — filtrada para integrar ao design escuro */}
         <div
           className="hero__bg"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
 
-        {/* Gradiente overlay */}
+        {/* Overlay gradiente — escurece foto e cria profundidade */}
         <div className="hero__overlay" />
 
-        {/* Texto centralizado */}
+        {/* Orb de luz central (CSS puro, flutua sobre o overlay) */}
+        <div className="hero__orb" aria-hidden="true" />
+
+        {/* Grade de linhas sutis */}
+        <div className="hero__grid" aria-hidden="true" />
+
+        {/* Conteúdo */}
         <div className="hero__content">
+          {/* Pill badge */}
+          <div className="hero__badge">
+            <span className="hero__badge-dot" />
+            Plataforma de Marketing Digital
+          </div>
+
           <h1 className="hero__h1">
             Resultados que<br />
             <em>transformam</em> negócios
@@ -53,6 +71,15 @@ export default function Home() {
             uma única plataforma pensada para crescimento escalável.
           </p>
 
+          {/* Stats row */}
+          <div className="hero__stats">
+            {STATS.map((s, i) => (
+              <div key={i} className="hero__stat">
+                <span className="hero__stat-value">{s.value}</span>
+                <span className="hero__stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── MOCKUP FLUTUANTE ─────────────────────────────── */}
