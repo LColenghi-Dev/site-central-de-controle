@@ -5,9 +5,9 @@ import { ExternalLink, Palette, Video, Calendar, Layers } from 'lucide-react'
    Como encontrar: abra a lista no ClickUp → copie a URL.
    ────────────────────────────────────────────────────────── */
 const CLICKUP_WORKSPACE = 'https://app.clickup.com'
-const CLICKUP_DESIGN    = 'https://app.clickup.com'   // URL da lista de Design
-const CLICKUP_VIDEO     = 'https://app.clickup.com'   // URL da lista de Vídeo
-const CLICKUP_AGENDA    = 'https://app.clickup.com'   // URL do calendário/Agendamentos
+const CLICKUP_DESIGN    = 'https://app.clickup.com/9007154660/v/l/8cdwhf4-13093'   // URL da lista de Design
+const CLICKUP_VIDEO     = 'https://app.clickup.com/9007154660/v/l/6-901316762308-1'   // URL da lista de Vídeo
+const CLICKUP_AGENDA    = 'https://app.clickup.com/9007154660/v/l/8cdwhf4-13173'   // URL do calendário/Agendamentos
 
 const LISTS = [
   {
@@ -38,9 +38,6 @@ const LISTS = [
 
 const WORKSPACE_LINKS = [
   { label: 'Visão Geral',    url: CLICKUP_WORKSPACE },
-  { label: 'Linha do Tempo', url: CLICKUP_WORKSPACE },
-  { label: 'Dashboard',      url: CLICKUP_WORKSPACE },
-  { label: 'Tudo',           url: CLICKUP_WORKSPACE },
 ]
 
 export default function Projetos() {

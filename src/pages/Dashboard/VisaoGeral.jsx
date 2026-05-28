@@ -5,7 +5,7 @@ import {
   Layers, Cpu, CheckCheck, Clock,
 } from 'lucide-react'
 
-/* ── Dados mockados ─────────────────────────────────────── */
+/* ── KPIs (mock — substituir quando houver API de ads) ──────── */
 const KPIS = [
   {
     label: 'Investimento',
@@ -19,7 +19,7 @@ const KPIS = [
   },
   {
     label: 'ROAS',
-    value: 420,           /* × 100 para animar como inteiro */
+    value: 420,
     format: v => (v / 100).toFixed(1) + '×',
     trend: 18,
     up: true,
@@ -29,7 +29,7 @@ const KPIS = [
   },
   {
     label: 'Impressões',
-    value: 1247,          /* × 1 000 → exibe como 1.247M */
+    value: 1247,
     format: v => (v / 1000).toFixed(2) + 'M',
     trend: 22.5,
     up: true,
@@ -57,7 +57,26 @@ const WEEK_DATA = [
 ]
 
 const PROJ_SUMMARY = { andamento: 8, revisao: 2, concluidos: 14 }
-const AUTO_SUMMARY = { ativos: 5, execucoes: '6.4k', uptime: '99.8%' }
+
+/* ── n8n ──────────────────────────────────────────────────── */
+const N8N_API = '/n8n-api'
+const API_KEY = import.meta.env.VITE_N8N_API_KEY ?? ''
+
+function timeAgo(iso) {
+  if (!iso) return '—'
+  const s = Math.floor((Date.now() - new Date(iso)) / 1000)
+  if (s < 60)  return `${s}s atrás`
+  const m = Math.floor(s / 60)
+  if (m < 60)  return `${m}min atrás`
+  const h = Math.floor(m / 60)
+  if (h < 24)  return `${h}h atrás`
+  return `${Math.floor(h / 24)}d atrás`
+}
+
+function fmtCount(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'k'
+  return n.toString()
+}
 
 /* ── Componente KPI com contador animado ─────────────────── */
 function KpiCard({ label, value, format, trend, up, icon: Icon, color, delay }) {
@@ -97,6 +116,62 @@ function KpiCard({ label, value, format, trend, up, icon: Icon, color, delay }) 
 
 /* ── Componente Principal ────────────────────────────────── */
 export default function VisaoGeral() {
+  /* ── Estado n8n ──────────────────────────────────────── */
+  const [autoData,    setAutoData]    = useState(null)   // { ativos, execucoesHoje, uptime, uptimeNum, ultimaExec }
+  const [autoLoading, setAutoLoading] = useState(true)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const headers = { 'X-N8N-API-KEY': API_KEY, Accept: 'application/json' }
+
+        const [wfRes, exRes] = await Promise.all([
+          fetch(`${N8N_API}/api/v1/workflows`, { headers }),
+          fetch(`${N8N_API}/api/v1/executions?includeData=false&limit=200`, { headers }),
+        ])
+
+        if (!wfRes.ok) return
+
+        const wfData  = await wfRes.json()
+        const exData  = exRes.ok ? await exRes.json() : { data: [] }
+        const executions = exData.data ?? []
+        const workflows  = wfData.data ?? []
+
+        /* Flows ativos */
+        const ativos = workflows.filter(w => w.active).length
+
+        /* Execuções iniciadas hoje */
+        const inicioDia = new Date(); inicioDia.setHours(0, 0, 0, 0)
+        const execucoesHoje = executions.filter(e => {
+          const t = e.startedAt || e.stoppedAt
+          return t && new Date(t) >= inicioDia
+        }).length
+
+        /* Uptime (taxa de sucesso) */
+        const ok = executions.filter(e => e.status === 'success').length
+        const uptimeNum = executions.length ? (ok / executions.length) * 100 : 0
+        const uptime    = executions.length ? uptimeNum.toFixed(1) + '%' : '—'
+
+        /* Última execução (timestamp mais recente) */
+        const ultimaExec = executions
+          .map(e => e.startedAt || e.stoppedAt)
+          .filter(Boolean)
+          .sort((a, b) => new Date(b) - new Date(a))[0] ?? null
+
+        setAutoData({ ativos, execucoesHoje, uptime, uptimeNum, ultimaExec })
+      } catch {
+        /* falha silenciosa — widget mantém último estado */
+      } finally {
+        setAutoLoading(false)
+      }
+    }
+
+    load()
+    const id = setInterval(load, 60_000)
+    return () => clearInterval(id)
+  }, [])
+
+  /* ── Render ──────────────────────────────────────────── */
   return (
     <div className="vg">
 
@@ -192,7 +267,7 @@ export default function VisaoGeral() {
             </p>
           </div>
 
-          {/* Automações widget */}
+          {/* Automações n8n widget — dados reais */}
           <div className="vg-widget dash-card">
             <div className="vg-widget__head">
               <Cpu size={15} className="vg-widget__icon" />
@@ -202,24 +277,38 @@ export default function VisaoGeral() {
               <div className="vg-widget__row">
                 <span className="vg-status-dot vg-status--green vg-status--pulse" />
                 <span className="vg-widget__row-label">Flows ativos</span>
-                <span className="vg-widget__row-val">{AUTO_SUMMARY.ativos}</span>
+                <span className="vg-widget__row-val">
+                  {autoLoading ? '…' : (autoData?.ativos ?? '—')}
+                </span>
               </div>
               <div className="vg-widget__row">
                 <span className="vg-status-dot vg-status--cyan" />
                 <span className="vg-widget__row-label">Execuções hoje</span>
-                <span className="vg-widget__row-val">{AUTO_SUMMARY.execucoes}</span>
+                <span className="vg-widget__row-val">
+                  {autoLoading ? '…' : (autoData ? fmtCount(autoData.execucoesHoje) : '—')}
+                </span>
               </div>
               <div className="vg-widget__row">
                 <span className="vg-status-dot vg-status--violet" />
                 <span className="vg-widget__row-label">Uptime</span>
-                <span className="vg-widget__row-val">{AUTO_SUMMARY.uptime}</span>
+                <span className="vg-widget__row-val">
+                  {autoLoading ? '…' : (autoData?.uptime ?? '—')}
+                </span>
               </div>
             </div>
             <div className="vg-widget__progress-bar">
-              <div className="vg-widget__progress-fill vg-widget__progress-fill--green" style={{ '--w': '99.8%' }} />
+              <div
+                className="vg-widget__progress-fill vg-widget__progress-fill--green"
+                style={{ '--w': autoData ? `${autoData.uptimeNum}%` : '0%' }}
+              />
             </div>
             <p className="vg-widget__foot">
-              <Clock size={12} /> Última exec. há 2 segundos
+              <Clock size={12} />
+              {autoLoading
+                ? 'Conectando…'
+                : autoData?.ultimaExec
+                  ? `Última exec. ${timeAgo(autoData.ultimaExec)}`
+                  : 'Nenhuma execução encontrada'}
             </p>
           </div>
 
