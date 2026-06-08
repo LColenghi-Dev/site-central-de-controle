@@ -65,8 +65,6 @@ export default function Login() {
           {/* Header */}
           <div className="login__header">
             <div className="login__header-eyebrow">
-              <span className="login__header-dot" />
-              Sistema ativo
             </div>
             <h1 className="login__title">Entrar</h1>
             <p className="login__sub">Acesse sua central de marketing</p>

@@ -52,10 +52,6 @@ export default function Dashboard() {
           {/* Brand */}
           <div className="dash__brand">
             <img src={logo} alt="Marazul" className="dash__brand-logo" />
-            <div className="dash__status">
-              <span className="dash__status-dot" />
-              <span className="dash__status-text">Sistema ativo</span>
-            </div>
           </div>
 
           {/* Nav */}
