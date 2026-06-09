@@ -6,8 +6,8 @@ import { ExternalLink, Zap, RefreshCw, AlertCircle } from 'lucide-react'
    Chamadas de API passam por /n8n-api/ (proxy Vite → sem CORS)
    ────────────────────────────────────────────────────────── */
 const N8N_PUBLIC = 'https://n8n.marazulagenciadigital.com.br'
-const N8N_API    = '/n8n-api'                           // proxy local
-const API_KEY    = import.meta.env.VITE_N8N_API_KEY ?? ''
+const N8N_API = '/api/n8n'
+import { supabase } from '../../lib/supabase'
 
 /* Formata tempo relativo em PT-BR */
 function timeAgo(iso) {
@@ -54,8 +54,9 @@ export default function Automacoes() {
     setError(null)
 
     try {
+      const { data: { session } } = await supabase.auth.getSession()
       const headers = {
-        'X-N8N-API-KEY': API_KEY,
+        'Authorization': `Bearer ${session?.access_token ?? ''}`,
         'Accept': 'application/json',
       }
 

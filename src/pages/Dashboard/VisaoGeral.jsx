@@ -59,8 +59,8 @@ const WEEK_DATA = [
 const PROJ_SUMMARY = { andamento: 8, revisao: 2, concluidos: 14 }
 
 /* ── n8n ──────────────────────────────────────────────────── */
-const N8N_API = '/n8n-api'
-const API_KEY = import.meta.env.VITE_N8N_API_KEY ?? ''
+const N8N_API = '/api/n8n'
+import { supabase } from '../../lib/supabase'
 
 function timeAgo(iso) {
   if (!iso) return '—'
@@ -123,7 +123,11 @@ export default function VisaoGeral() {
   useEffect(() => {
     const load = async () => {
       try {
-        const headers = { 'X-N8N-API-KEY': API_KEY, Accept: 'application/json' }
+        const { data: { session } } = await supabase.auth.getSession()
+        const headers = {
+          'Authorization': `Bearer ${session?.access_token ?? ''}`,
+          'Accept': 'application/json',
+        }
 
         const [wfRes, exRes] = await Promise.all([
           fetch(`${N8N_API}/api/v1/workflows`, { headers }),

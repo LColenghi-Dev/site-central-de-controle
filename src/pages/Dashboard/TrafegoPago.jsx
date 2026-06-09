@@ -8,13 +8,15 @@ import {
 /* ─────────────────────────────────────────────────────────────
    CONFIGURAÇÃO — troque pela URL base do dashboard do gestor
    ───────────────────────────────────────────────────────────── */
-const EXTERNAL_DASHBOARD_URL = 'https://SEU-DASHBOARD-EXTERNO-AQUI.com'
-const API_BASE               = 'https://SEU-DASHBOARD-EXTERNO-AQUI.com/api'
-const API_KEY                = 'mgr_live_COLE_SUA_CHAVE_AQUI'  // gerada nas Configurações do dashboard do gestor
+const EXTERNAL_DASHBOARD_URL = 'https://api.marazulagenciadigital.com.br'
+import { supabase } from '../../lib/supabase'
 
-const apiFetch = (path) => fetch(`${API_BASE}${path}`, {
-  headers: { Authorization: `Bearer ${API_KEY}` },
-})
+const apiFetch = async (path) => {
+  const { data: { session } } = await supabase.auth.getSession()
+  return fetch(`/api/traffic${path}`, {
+    headers: { Authorization: `Bearer ${session?.access_token ?? ''}` },
+  })
+}
 
 /*
   CONTRATO DE API ESPERADO

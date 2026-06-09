@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import logo from '../../assets/imagens/logo-marazul.svg'
+import { supabase } from '../../lib/supabase'
 
 /* Métricas live exibidas no painel esquerdo */
 const LIVE_METRICS = [
@@ -11,14 +12,29 @@ const LIVE_METRICS = [
 ]
 
 export default function Login() {
-  const navigate  = useNavigate()
+  const navigate = useNavigate()
   const [showPass, setShowPass] = useState(false)
   const [remember, setRemember] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    sessionStorage.setItem('marazul_auth', '1')
-    navigate('/dashboard')
+    setErrorMsg('')
+    setLoading(true)
+
+    const form = e.currentTarget
+    const email = form.querySelector('#email').value
+    const password = form.querySelector('#password').value
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+    setLoading(false)
+    if (error) {
+      setErrorMsg('E-mail ou senha incorretos.')
+    } else {
+      navigate('/dashboard')
+    }
   }
 
   return (
@@ -126,9 +142,14 @@ export default function Login() {
             <span>Lembrar de mim</span>
           </label>
 
+          {/* Mensagem de erro */}
+          {errorMsg && (
+            <p style={{ color: '#f87171', fontSize: 13, marginBottom: 4 }}>{errorMsg}</p>
+          )}
+
           {/* Submit */}
-          <button type="submit" className="login__submit">
-            Acessar Ecossistema
+          <button type="submit" className="login__submit" disabled={loading}>
+            {loading ? 'Entrando...' : 'Acessar Ecossistema'}
           </button>
 
         </form>

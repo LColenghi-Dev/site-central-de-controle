@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { supabase } from '../../lib/supabase'
+import { useAuth } from '../../contexts/AuthContext'
 import {
   LayoutDashboard, TrendingUp, Layers, Cpu,
   Bell, Settings, LogOut, ChevronRight,
@@ -28,14 +30,8 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const [active, setActive] = useState('visao')
 
-  useEffect(() => {
-    if (!sessionStorage.getItem('marazul_auth')) {
-      navigate('/login')
-    }
-  }, [navigate])
-
-  function logout() {
-    sessionStorage.removeItem('marazul_auth')
+  async function logout() {
+    await supabase.auth.signOut()
     navigate('/login')
   }
 
